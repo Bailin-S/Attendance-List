@@ -64,16 +64,6 @@ int main()
     attendanceFile.close();
 
     cout << "\nAttendance saved to " << day << "-" << month << "-" << year << ".txt\n";
-
-    ifstream attendanceFile(day + "-" + month + "-" + year + ".txt");
-
-    while (getline (attendanceFile, attendanceText)) {
-  // Output the text from the file
-  cout << attendanceFile;
-}
-
-// Close the file
-attendanceFile.close();
 }
 
 
