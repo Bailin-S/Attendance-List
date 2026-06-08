@@ -5,58 +5,75 @@
 
 using namespace std;
 
-int main() {
-cout << "-------------------\n";
-cout << "[ Attendance List ]\n";
-cout << "-------------------\n";
+int main()
+{
+    cout << "-------------------\n";
+    cout << "[ Attendance List ]\n";
+    cout << "-------------------\n";
 
-vector<string> people = {
-"exampleOne",
-"exampleTwo",
-"exampleThree",
-"exampleFour",
-"exampleFive",
-"exampleSix",
-"exampleSeven",
-"exampleEight",
-"exampleNine",
-"exampleTen"
-};
+    vector<string> people =
+    {
+        "exampleOne",
+        "exampleTwo",
+        "exampleThree",
+        "exampleFour",
+        "exampleFive",
+        "exampleSix",
+        "exampleSeven",
+        "exampleEight",
+        "exampleNine",
+        "exampleTen"
+    };
 
-string date;
+    string day, month, year, attedanceText;
 
-cout << "What is the date today (MM-DD-YY): ";
-cin >> date;
+    cout << "What day is it today: ";
+    cin >> day;
+    cout << "What month is it today: ";
+    cin >> month;
+    cout << "What year is it today: ";
+    cin >> year;
 
 // Create attendance file
-ofstream attendanceFile(date + ".txt");
+    ofstream attendanceFile(day + "-" + month + "-" + year + ".txt");
 
-if (!attendanceFile) {
-cout << "Error creating file.\n";
-return 1;
+    if (!attendanceFile)
+    {
+        cout << "Error creating file.\n";
+        return 1;
+    }
+    for (string person : people)
+    {
+        char present;
+
+        cout << person << " present? (Y/N): ";
+        cin >> present;
+
+        attendanceFile << person << " - ";
+
+        if (present == 'Y' || present == 'y')
+        {
+            attendanceFile << "Present\n";
+        }
+        else
+        {
+            attendanceFile << "Absent\n";
+        }
+    }
+
+    attendanceFile.close();
+
+    cout << "\nAttendance saved to " << day << "-" << month << "-" << year << ".txt\n";
+
+    ifstream attendanceFile(day + "-" + month + "-" + year + ".txt");
+
+    while (getline (attendanceFile, attendanceText)) {
+  // Output the text from the file
+  cout << attendanceFile;
 }
 
-attendanceFile << "Attendance for " << date << "\n";
-attendanceFile << "-------------------\n";
-
-for (string person : people) {
-char present;
-
-cout << person << " present? (Y/N): ";
-cin >> present;
-
-attendanceFile << person << " - ";
-
-if (present == 'Y' || present == 'y') {
-attendanceFile << "Present\n";
-} else {
-attendanceFile << "Absent\n";
-}
-}
-
+// Close the file
 attendanceFile.close();
-
-cout << "\nAttendance saved to " << date << ".txt\n";
-
-return 0;
 }
+
+
